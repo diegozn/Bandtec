@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>Desafio</h4>
+    <input id="ipt_linhas" type="text"> Nome das linhas de ônibus que você pegou durante a semana
+    <button onclick="gravar()">Gravar busão</button>
+    <br>
+    <br>
+
+    <input id="ipt_pesquisar" type="text">
+    <button onclick="pesquisar()">pesquisar</button>
+
+    <div id="msg"></div>
+    <div id="frase"></div>
+</body>
+</html>
+<script>
+    lista = [];
+    var num = 0
+    var linhas;
+    function gravar(){
+        msg.innerHTML = ''
+    var v_linhas = ipt_linhas.value;
+    lista.push(Number(v_linhas))
+    for (var i = lista.length -1; i > 0; i--) {
+        msg.innerHTML += `${lista[i]} <br>`
+      
+    }
+   
+    }
+
+    
+    function pesquisar() {
+        frase.innerHTML = ''
+        if (lista.indexOf(Number(ipt_pesquisar.value)) == -1) {
+            frase.innerHTML =  'Você nunca pegou essa linha';
+        } else {
+            for (var i = 0; i <= lista.length; i ++ ) {
+                if (!( lista.indexOf(ipt_pesquisar.value) == -1)) {
+                    frase.innerHTML +=  `Você já pegou essa linha ${num} vezes, nessa ordem: <br>`;
+                    num ++;
+
+                }
+               
+            }
+           
+
+        }
+        
+    }
+</script>
