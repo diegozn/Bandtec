@@ -7,51 +7,41 @@
     <title>Document</title>
 </head>
 <body>
-    <h4>Desafio</h4>
-    <input id="ipt_linhas" type="text"> Nome das linhas de ônibus que você pegou durante a semana
-    <button onclick="gravar()">Gravar busão</button>
-    <br>
-    <br>
-
-    <input id="ipt_pesquisar" type="text">
-    <button onclick="pesquisar()">pesquisar</button>
-
-    <div id="msg"></div>
-    <div id="frase"></div>
+    <input id="ipt_linhas" type="text" placeholder="Onibus na semana"> 
+    <button onclick="gravar()">Gravar buzão</button>
+    <button onclick="pesquisar()">Pesquisar</button> 
+    <div id="msg"></div> <br>
+    <div id="msg2"></div> 
 </body>
 </html>
 <script>
     lista = [];
-    var num = 0
-    var linhas;
-    function gravar(){
-        msg.innerHTML = ''
-    var v_linhas = ipt_linhas.value;
-    lista.push(Number(v_linhas))
-    for (var i = lista.length -1; i > 0; i--) {
-        msg.innerHTML += `${lista[i]} <br>`
-      
-    }
-   
-    }
-
-    
-    function pesquisar() {
-        frase.innerHTML = ''
-        if (lista.indexOf(Number(ipt_pesquisar.value)) == -1) {
-            frase.innerHTML =  'Você nunca pegou essa linha';
-        } else {
-            for (var i = 0; i <= lista.length; i ++ ) {
-                if (!( lista.indexOf(ipt_pesquisar.value) == -1)) {
-                    frase.innerHTML +=  `Você já pegou essa linha ${num} vezes, nessa ordem: <br>`;
-                    num ++;
-
-                }
-               
-            }
-           
-
+    num = [];
+    function gravar() {
+        msg.innerHTML = '';
+        var v_linhas = ipt_linhas.value;
+        lista.push(v_linhas);
+        for (var i = lista.length -1; i >= 0; i --) {
+            msg.innerHTML += `${lista[i]} <br>`
         }
         
+    }
+    function pesquisar (){
+        msg2.innerHTML = ''
+        var count = 1
+        if (lista.indexOf(ipt_linhas.value) == -1) {
+            
+            msg2.innerHTML += `Você nunca pegou a linha ${ipt_linhas.value} <br>` 
+        } else {
+            for (var i = 0; i <= lista.length -1 ; i ++) {
+                num.push(lista[i])  
+                if (ipt_linhas.value == num[i]){
+                   
+                    msg2.innerHTML = `Você já pegou o onibus ${count ++} vezes`
+                }
+
+            }
+            
+        }
     }
 </script>
