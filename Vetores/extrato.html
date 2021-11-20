@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Extrato Bancário</h1>
+    <div id="pt1">
+        <input id="id_ipt_nome" type="text"> Digite seu Nome <br>
+        <input id="id_ipt_banco" type="text"> N Banco <br>
+        <input id="id_ipt_agencia" type="text"> Agência <br>
+        <input id="id_ipt_conta" type="text"> conta <br>
+        <input onchange="validar()" id="id_ipt_digito" type="text"> Digito <br>
+    </div>
+
+
+        <div id="pt2">
+            <br>
+            <br>
+            <br>
+            <select id="select_box">
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+            </select>
+            <input id="id_ipt_data" type="date" placeholder="data"> <br>
+            <input id="id_ipt_movimentacao" type="text"> valor da movimentação
+            <br>
+            <button onclick="extrato2()">Validar</button> <br>
+            <button onclick="mudar()">Mudar conta</button> <br>
+            <div id="msg"></div>
+        </div>
+</body>
+
+</html>
+<script>
+    function validar() {
+        msg.innerHTML = ``;
+        var ipt_nome = id_ipt_nome.value;
+        var ipt_banco = Number(id_ipt_banco.value);
+        var ipt_agencia = Number(id_ipt_agencia.value);
+        var ipt_conta = Number(id_ipt_conta.value);
+        var ipt_digito = Number(id_ipt_digito.value);
+        
+        if (ipt_banco == '001' || ipt_banco == '102' || ipt_banco == '237' || ipt_banco == '341') {
+            if (ipt_nome.length >= 3) {
+                if (ipt_agencia > 0 && ipt_agencia < 999) {
+                    if (ipt_conta > 0 && ipt_conta < 99999) {
+                        if (ipt_digito == ((ipt_conta % 11) % 10)) {
+
+                            pt1.style.display = 'none'
+                            pt2.style.display = 'block'
+                        } else {
+                            alert('Digite um digito correto!')
+
+                        }
+                    } else {
+                        alert('digite uma conta correta!')
+                    }
+                } else {
+                    alert('Digite uma agencia correta!')
+                }
+            } else {
+                alert('Digite um nome correto')
+            }
+        } else {
+            alert('Digite seu banco corretamente!')
+        }
+
+
+
+    }
+
+    function extrato2() {
+        var ipt_movimentacao = Number(id_ipt_movimentacao.value);
+        var saldo_inicial = 200;
+        var saldo_final = 0;
+        if (select_box.value == 'debito') {
+            saldo_final = saldo_inicial - ipt_movimentacao
+        } else if (select_box.value == 'credito') {
+            saldo_final = saldo_inicial + ipt_movimentacao
+        }
+        msg.innerHTML = `${id_ipt_data.value} - Saldo inicial R$ ${saldo_inicial}   ${select_box.value} R$ ${ipt_movimentacao} Saldo final= R$ ${saldo_final}`;
+    }
+
+    function mudar() {
+        pt2.style.display = 'none'
+        msg.innerHTML = '';
+        pt1.style.display = 'block'
+    }
+</script>

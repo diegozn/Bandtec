@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="pt1">
+    <h1>Análise de performance de Alunos - Registro</h1>
+    Entre com o Nome do aluno: <input id="id_ipt_nome" type="text"> <br>
+    Entre com a Nota do aluno: <input id="id_ipt_nota" type="text"> <br>
+    <button onclick="registrar()">Registrar</button> <button onclick="analisar()">Analisar</button>
+    <div id="msg"></div>
+    </div>
+
+    <div id="pt2">
+    <h1>Análise de performance de Alunos - Registro</h1>
+    Entre com o intervalo de notas: <input id="id_ipt_de" type="text" placeholder="De"> <input id="id_ipt_ate" type="text" placeholder="Até"> <br>
+    <button onclick="pesquisar()">Pesquisar</button>
+    <div id="msg2"></div>
+    <div id="msg3"></div>
+    </div>
+
+</body>
+</html>
+<script>
+    nome = []
+    nota = []
+    function registrar(){
+        msg.innerHTML = ``;
+        var ipt_nome = id_ipt_nome.value;
+        var ipt_nota = id_ipt_nota.value;
+        if (ipt_nota >= 0 && ipt_nota <= 10 && ipt_nome != ''){
+            nome.push(ipt_nome)
+            nota.push(ipt_nota)
+            for (var i = nota.length -1; i >= 0; i --){
+            msg.innerHTML += `${nome[i]} tirou ${nota[i]} <br>`
+
+        }
+        } else {
+            alert('Erro! Digite corretamente.')
+        }
+    }
+    function analisar(){
+        msg.innerHTML = ``;
+        pt1.style.display = 'none'
+        pt2.style.display = 'block'
+
+    }
+    function pesquisar(){
+        msg2.innerHTML = ``;
+        msg3.innerHTML = ``;
+        var num = 0;
+        var maior = 0;
+        var menor = 11;
+        var total = 0;
+        
+        var ipt_de = Number(id_ipt_de.value);
+        var ipt_ate = Number(id_ipt_ate.value);
+
+
+
+        if (ipt_de >= 0 && ipt_de <= 10 && ipt_ate >= 0 && ipt_ate <= 10) {
+            if (ipt_de <= ipt_ate){
+
+                for (var i = 0; i <= nota.length; i++){
+                    if ( Number(nota[i]) >= ipt_de && Number(nota[i]) <= ipt_ate){
+                        num ++
+                        if (maior <= nota[i]){
+                            maior = nota[i]
+                        }
+                        if (menor >= nota[i]){
+                            menor = nota[i]
+                        }
+
+                       
+                         total += Number(nota[i])
+     
+                        
+                        
+                        msg2.innerHTML += `O aluno ${nome[i]} ficou com a nota ${nota[i]} <br> <br>`;
+                        msg3.innerHTML = `Total de alunos registrados: ${nome.length} <br> Total de alunos listados: ${num} <br> Maior nota = ${maior} <br> Menor nota = ${menor} <br> média da nota = ${(total / num).toFixed(2)}` ;
+                    }
+                }
+
+
+
+            } else {
+                alert('O campo "de" deve ser menor ou igual ao campo "até"')
+            }
+        } else {
+            alert('Os campos devem ser de 0 a 10')
+        }
+        
+    }
+</script>
