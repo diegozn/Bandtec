@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Shopping</h1>
+    <input id="id_ipt_nome" type="text">Nome do produto <br>
+    <input id="id_ipt_preco" type="text">Preço de compra <br>
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="relatorio()">Relatório de estoque</button> <br>
+    <div id="msg"></div>
+
+</body>
+</html>
+<script>
+    nome = [];
+    preco = [];
+    caro = 0;
+    nome_caro = 0;
+    barato = 99999;
+    nome_barato = 0;
+    total = 0;
+    function cadastrar(){
+        var ipt_nome = id_ipt_nome.value;
+        var ipt_preco = id_ipt_preco.value;
+        nome.push(ipt_nome);
+        preco.push(Number(ipt_preco));
+    };
+
+    function relatorio(){
+        msg.innerHTML = '';
+        msg.innerHTML += `Total de produtos: ${nome.length} <br><br>`;
+        for (var i = 0; i < nome.length; i++) {
+
+            msg.innerHTML += ` Produto${i + 1}: ${nome[i]} <br> Preço de compra: R$${preco[i]}. Vender por R$${preco[i] * 1.25} <br>`
+        }
+
+        for (var i = 0; i < preco.length; i++) {
+            if (caro < preco[i]){
+                caro = preco[i]
+                nome_caro = nome[i]
+            }
+        }
+
+        for (var i = 0; i < preco.length; i++) {
+            if (barato > preco[i]){
+                barato  = preco[i]
+                nome_barato = nome[i]
+            }
+        }
+
+        for (var i = 0; i < preco.length; i++) {
+            total += preco[i];
+        }
+        
+        msg.innerHTML += `<br> Produto mais caro: ${nome_caro} custando ${caro * 1.25} <br>`
+        msg.innerHTML += `<br> Produto mais barato: ${nome_barato} custando ${barato * 1.25} <br>`
+        msg.innerHTML += `<br> Médio de preço dos produtos ${((total + (total * 0.25)) / preco.length).toFixed(2)}`
+
+
+    };
+
+</script>

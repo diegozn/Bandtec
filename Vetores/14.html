@@ -32,7 +32,7 @@
         msg.innerHTML = '';
         msg.innerHTML += `Total de produtos: ${nome.length} <br> <br>`
         for (var i = 0; i < nome.length; i++) {
-            msg.innerHTML += ` Produto ${i + 1}: ${nome[i]} <br> Preço de compra: R$${valor[i]}. Vender por R$${valor[i] + (valor[i] * 0.25)} <br> <br>`
+            msg.innerHTML += ` Produto ${i + 1}: ${nome[i + 1]} <br> Preço de compra: R$${valor[i]}. Vender por R$${valor[i] + (valor[i] * 0.25)} <br> <br>`
         }
        
     }

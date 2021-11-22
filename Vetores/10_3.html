@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="id_ipt_linhas" type="text"> Nome da linha <br>
+    <input id="id_ipt_pesquisar" type="text" placeholder="pesquisar">
+    <button onclick="gravar()">Gravar buzão</button>  
+    <button onclick="pesquisar()">Pesquisar</button> <br>
+    <div id="msg"></div>
+    <div id="msg2"></div>
+
+</body>
+</html>
+<script>
+    lista = [];
+    function gravar(){
+        msg.innerHTML  = '';
+        var ipt_linhas = id_ipt_linhas.value
+        lista.push(ipt_linhas)
+        for (var i = lista.length -1; i >= 0; i --){
+            msg.innerHTML += `${lista[i]} <br>`
+            
+        }
+    }
+    function pesquisar(){
+        msg2.innerHTML = '';
+        num = 0;
+        guarda = '';
+        var ipt_pesquisar = id_ipt_pesquisar.value;
+        if (lista.indexOf(ipt_pesquisar) == -1) {
+            msg2.innerHTML = `Você nunca pegou essa linha`
+        } else {
+            for (var i = 0; i <= lista.length; i++) {
+                if(lista[i] == ipt_pesquisar) {
+
+                    guarda += ` ${i + 1} , `
+                    num ++
+                }
+                msg2.innerHTML = `Você  pegou essa linha ${num} vezes, nessa ordem ${guarda} <br>`
+            }
+          
+        }
+    }
+</script>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>AllFat - Auxílio Alimentação</h1>
+    <div id="pt1">
+        Informe o valor do Beneficio: <input id="id_ipt_valor" type="text"> <br>
+        <button onclick="cadastrar()">Cadastrar</button> <button onclick="pesquisar()">Pesquisar</button>
+        <div id="msg"></div>
+    </div>
+
+    <div id="pt2" style="display: none;">
+        <h4>Informe o intervalo de Valores para pesquisa</h4>
+        de: <input id="id_ipt_de" type="text"> até: <input id="id_ipt_ate" type="text"> <button
+            onclick="resumir()">Resumir intervalo</button> <br><br>
+
+        <h4>Informe o valor para ser pesquisado</h4>
+        valor: <input id="id_ipt_procurar" type="text"> <button onclick="procurar()">procurar valor</button><br>
+        <div id="msg2"></div>
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+    valor = []
+
+    function cadastrar() {
+        msg.innerHTML = '';
+        var ipt_valor = Number(id_ipt_valor.value);
+        if (ipt_valor >= 3.00 && ipt_valor <= 35.00) {
+            valor.push(ipt_valor);
+            msg.innerHTML += '<b>Histórico dos Benefícios<b> <br>'
+            for (var i = valor.length - 1; i >= 0; i--) {
+                msg.innerHTML += ` A ${i + 1} ocorrência é ${valor[i]} <br>`
+            }
+        } else {
+            alert('Valor incorrreto!')
+        }
+    }
+    function pesquisar() {
+        if (valor.length == 0) {
+            alert('Não deixe o campo vazio!')
+        } else {
+            pt1.style.display = 'none';
+            pt2.style.display = 'block';
+        }
+    }
+    var num  = '';
+    function resumir() {
+
+        msg2.innerHTML = '';
+        var ipt_de = Number(id_ipt_de.value);
+        var ipt_ate = Number(id_ipt_ate.value);
+        var maior = 0;
+        var menor = 9999;
+        var total = 0;
+
+        if (valor.length != 0) {
+
+
+            if (ipt_de >= 3.00 && ipt_ate >= 3.00 && ipt_ate <= 35.00 && ipt_de <= 35) {
+
+                if (ipt_ate != '' && ipt_de != '') {
+                    if (!(ipt_de <= ipt_ate)) {
+                        alert('Erro! O campo "de" deve ser menor ou igual o "até"!')
+                    } else {
+                        msg2.innerHTML = ``;
+
+                        for (var i = 0; i <= valor.length; i++) {
+                            if (valor[i] >= ipt_de && valor[i] <= ipt_ate) {
+                               
+                                if (maior <= valor[i]) {
+                                    maior = valor[i]
+                                }
+                                if (menor >= valor[i]) {
+                                    menor = valor[i]
+                                }
+
+
+                                total += Number(valor[i])
+
+                            }
+
+                        }
+
+                        msg2.innerHTML += `<b>Resumo dos Benefícios desse Intervalo<b> <br>`
+                        msg2.innerHTML += `O MAIOR valor encontrado no intervalor informado foi ${(maior).toFixed(2)} <br> `
+                        msg2.innerHTML += `O Menor valor encontrado no intervalor informado foi ${(menor).toFixed(2)}  <br>`
+                        msg2.innerHTML += `O Média dos valores do intervalo informado foi ${(total / valor.length).toFixed(2)} <br>`
+                    }
+
+                } else {
+                    alert('Não deixe nenhum campo em branco!')
+                }
+
+
+            } else {
+                alert('Os numeros devem ser entre 3 a 35!')
+            }
+
+
+        }
+
+
+
+     else {
+        alert('Sem numeros no momento!')
+    }
+
+    }
+
+    function procurar() {
+        var ipt_procurar = Number(id_ipt_procurar.value);
+        msg2.innerHTML = '';
+        var vazio = (ipt_procurar == '');
+        var nao_encontrado = (valor.indexOf(ipt_procurar) == - 1);
+
+        if (vazio == true) {
+            alert('Prenncha o campo')
+            
+        }
+
+        if ( vazio == false && nao_encontrado == true){
+            msg2.innerHTML = `O Valor ${ipt_procurar} não encontrado`
+        }
+
+        if (vazio == false && nao_encontrado == false){
+
+            for (var i = 0; i <= valor.length; i++){
+                if (valor[i] == ipt_procurar) {
+                    num += `${i + 1} ,`
+                    msg2.innerHTML += `O valor R$${ipt_procurar} foi encontrado na ${num} ocorrência <br>`
+                }
+        }
+        }
+       
+        
+    }
+</script>

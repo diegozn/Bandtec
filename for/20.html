@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Exercicio</h1>
+    <button onclick="curto()">Curto 3 e 5</button>
+    <div id="msg"></div>
+
+</body>
+</html>
+<script>
+    // nesse exercicio a ordem é muito importante
+    // pois o É PENTAA E TRII pode não aparecer,
+    // ja q os outros tbm são vdd
+    function curto(){
+        msg.innerHTML = '';
+        for (var i = 0; i <= 100; i++) {
+            if (i % 5 == 0 && i % 3 == 0) {
+                msg.innerHTML += 'É PENTAA E TRII!! <br>'
+               
+            } else if (i % 5 == 0) {
+                msg.innerHTML += 'É PENTAA!! <br>'
+            } else if (i % 3 == 0) {
+                msg.innerHTML += 'É TRIII!! <br>'
+            } else {
+                msg.innerHTML += `${i} <br>`
+            }
+        }
+    }
+</script>

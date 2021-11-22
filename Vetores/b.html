@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Extrato bancário</h1>
+    <div>
+    <input id="id_nome" minlength="3" type="text"> Nome <br>
+    <input id="id_banco" type="text"> Banco <br>
+    <input id="id_agencia" type="text"> Agencia <br>
+    <input id="id_conta" type="text"> Conta <br>
+    <input id="id_digito" type="text"> Digito <br>
+    <br>
+    </div>
+    <button onclick="entrar()">Entrar</button>
+
+
+    <!-- <select id="id_combo">
+        <option value="">Débito</option>
+        <option value="">Crédito</option>
+    </select> -->
+
+
+    <div id="id_div" style="display: none;">
+    <span id="id_data" ></span> - <span id="id_inicial"></span> R$ <span id="id_combo"></span> R$ <span id="id_movimentacao"></span> Saldo final= R$ <span id="id_final"></span> onde:
+    </div>
+</body>
+</html>
+<script>
+    function entrar(){
+        id_div.style.display = 'none'
+        var nome = id_nome.value;
+        var banco = id_banco.value;
+        var agencia = id_agencia.value;
+        var conta = id_conta.value;
+        var digito = id_digito.value;
+
+        var v_nome = (nome >= nome.length(3));
+        var v_banco = (banco == 001 || banco == 102 || banco == 237 || banco == 341);
+        var v_agencia =  (agencia > 0 && agencia < 999);
+        var v_conta =  (conta > 0 && conta < 9999);
+        var v_digito = (digito == ((conta % 11) % 10) );
+
+        if (v_banco == false) {
+            alert('Banco invalido')
+        }
+        if (v_agencia == false) {
+            alert('Agencia invalido')
+        }
+        if (v_conta == false) {
+            alert('conta invalido')
+        }
+        if (v_digito == false) {
+            alert('digito invalido')
+        }
+
+        if (v_banco == true && v_agencia == true && v_conta == true && v_digito == true) {
+           
+            id_div.style="display: block;"
+
+        }
+        
+        
+    };
+</script>
